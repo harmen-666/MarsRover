@@ -17,7 +17,7 @@ namespace MarsRover
             Console.CursorVisible = false; // cursor weg
 
             Mars mars = new Mars();
-            Basisstation station = new Basisstation();
+            Basisstation station = new Basisstation(mars.grootteX, mars.grootteY);
             InSight rover = new InSight();
             GenerateWater Water = new GenerateWater();
             int[] CoWaX = Water.GenerateX();
@@ -25,6 +25,7 @@ namespace MarsRover
             rover.ToonInSight();
             mars.toonMars();
             station.toonBasis();
+            station.Laadstation(rover.posX, rover.posY);
 
             while (true)
             {
@@ -62,8 +63,8 @@ namespace MarsRover
         //hey kids
         char symbool = '#';
         ConsoleColor kleur = ConsoleColor.Yellow;
-        int posX = 1;
-        int posY = 1;
+        public int posX = 1;
+        public int posY = 1;
         Energie F;
         //verbreuk per verplaatsing
         public int vpv = 1;
@@ -156,13 +157,21 @@ namespace MarsRover
             fuel = 50;
         }
     }
-
     class Basisstation
     {
+        //Locatie basisstation
+        Random locatie = new Random();
+        int bposX;
+        int bposY;
+
+        public Basisstation (int grootteX, int grootteY)
+	    {
+            posX = locatie.Next(1,grootteX);
+            posY = locatie.Next(1,grootteY);
+	    }
+
         char symbool = '▀';
         ConsoleColor basis = ConsoleColor.Green;
-        int posX = 5;
-        int posY = 3;
 
         public void toonBasis()
         {
@@ -171,17 +180,12 @@ namespace MarsRover
         }
 
 
-        private void Laadstation()
+        public void Laadstation(int posX, int posY)
         {
-            if (posX == 50 && posY == 30)
+            if (bposX == posX && bposY == posY)
             {
                 Opladen();
             }
-        }
-
-        private void Opladen()
-        {
-            //energie = energie++;
         }
 
 }

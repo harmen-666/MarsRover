@@ -9,8 +9,8 @@ namespace MarsRover
 {
     class Mars
     {
-        int grootteX = 40;
-        int grootteY = 20;
+        public int grootteX = 40;
+        public int grootteY = 20;
 
 
 
