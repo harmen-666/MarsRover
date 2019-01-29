@@ -9,8 +9,8 @@ namespace MarsRover
 {
     class Mars
     {
-        int grootteX = 40;
-        int grootteY = 20;
+       public int grootteX = 40;
+       public int grootteY = 20;
 
 
 
@@ -54,31 +54,34 @@ namespace MarsRover
         }
     class GenerateWater
     {
-        int[] CoX = new int[10];
-        int[] CoY = new int[10];
-        int X;
-        int Y;
+        int Xmax;
+        int Ymax;
+        int kans;
+        bool[,] waterplaatsen;
         Random Generate = new Random();
 
-        public int[] GenerateX()
+        public GenerateWater(int x, int y)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                X = Generate.Next(0, 40);
-                CoX[i] = X;
 
-            }
-            return CoX;
+            waterplaatsen = new bool[x,y];
+             Xmax = x;
+             Ymax = y;
         }
-        public int[] GenerateY()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Y = Generate.Next(0, 20);
-                CoY[i] = Y;
 
+        public void Plaats()
+        {
+            for (int i = 1; i < Xmax-1; i++)
+            {
+                for (int j = 1; j < Ymax-1; j++)
+                {
+                    kans = Generate.Next(0, 11);
+                    if(kans == 1)
+                    {
+                        waterplaatsen[i, j] = true;
+                    }
+                    else { waterplaatsen[i, j] = false; }
+                }
             }
-            return CoY;
         }
     }
 }
