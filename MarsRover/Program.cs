@@ -12,10 +12,10 @@ namespace MarsRover
  
         public static void Main(string[] args)
         {
-
             Console.BackgroundColor = ConsoleColor.DarkRed; // mars :-)
             Console.Clear();
             Console.CursorVisible = false; // cursor weg
+            //Barier grens = new Barier();
 
             Mars mars = new Mars();
             Basisstation station = new Basisstation();
@@ -23,8 +23,11 @@ namespace MarsRover
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
             rover.ToonInSight();
             mars.toonMars();
+
+            //grens.test(rover);
             station.toonBasis();
             water.Plaats();
+
 
             while (true)
             {
@@ -46,6 +49,12 @@ namespace MarsRover
                         case ConsoleKey.RightArrow:
                             rover.moveRight();
                             break;
+                        case ConsoleKey.T:
+                            water.WaterZien();
+                            break;
+                        case ConsoleKey.Y:
+                            water.WaterNietZien();
+                            break;
                         case ConsoleKey.Enter:
                             rover.boor(water.Plaats());
                             break;
@@ -53,8 +62,12 @@ namespace MarsRover
                     Console.Clear();
                     rover.ToonInSight();
                     mars.toonMars();
+                    mars.RotsenTonen();
                     station.toonBasis();
                     rover.gevondenwater();
+
+
+
                 }
             }
         }
@@ -66,8 +79,9 @@ namespace MarsRover
         //hey kids
         char symbool = '#';
         ConsoleColor kleur = ConsoleColor.Yellow;
-        int posX = 1;
-        int posY = 1;
+
+        public int posX = 1;
+        public int posY = 1;
         Energie F;
         //verbreuk per verplaatsing
         public int vpv = 1;
@@ -85,7 +99,8 @@ namespace MarsRover
 
         public void moveUp()
         {
-            if (posY > 0)
+
+            if (posY > 1 && F.huidigverbruik() > 0)
             {
                 posY--;
                 F.verbruik(vpv);
@@ -94,23 +109,34 @@ namespace MarsRover
 
         public void moveDown()
         {
-            posY++;
-            F.verbruik(vpv);
+  
+            if (posY < 19 && F.huidigverbruik() > 0)
+            {
+              posY++;
+              F.verbruik(vpv);
+            }
         }
 
         public void moveLeft()
         {
-            if (posX > 0)
+
+            if (posX > 1 && F.huidigverbruik() > 0)
             {
                 posX--;
                 F.verbruik(vpv);
             }
+       
+     
         }
 
         public void moveRight()
         {
-            posX++;
-            F.verbruik(vpv);
+
+            if (posX < 39 && F.huidigverbruik() > 0)
+            {
+              posX++;
+              F.verbruik(vpv);
+            }
         }
         
 
@@ -132,10 +158,12 @@ namespace MarsRover
         ConsoleColor water = ConsoleColor.Blue;
         public void boor(bool[,] water)
         {
+
             if (water[posX,posY])
             {
                 toonwater(true);
             }
+
         }
         public void toonwater(bool succes)
         {
@@ -177,13 +205,14 @@ namespace MarsRover
             fuel = fuel - F;
             return fuel;
         }
-        public int huidigverbruik(int groote)
+        public int huidigverbruik()
         {
             return fuel;
         }
         public void opladen()
         {
             fuel = 50;
+
         }
     }
 
@@ -217,3 +246,5 @@ namespace MarsRover
 }
 
 }
+
+
