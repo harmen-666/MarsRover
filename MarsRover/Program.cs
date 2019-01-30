@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,13 +47,14 @@ namespace MarsRover
                             rover.moveRight();
                             break;
                         case ConsoleKey.Enter:
-                            rover.boor();
+                            rover.boor(water.Plaats());
                             break;
                     }
                     Console.Clear();
                     rover.ToonInSight();
                     mars.toonMars();
                     station.toonBasis();
+                    rover.gevondenwater();
                 }
             }
         }
@@ -123,28 +125,47 @@ namespace MarsRover
         }
         //boren
         bool succes = false;
-        char waterplas = '〰';
-        
-        ConsoleColor water = ConsoleColor.Blue;
-        public void boor()
-        {
-            for (int i =0; i < .length; i++)
-            {
+      //  char waterplas = '〰';
+        List<int> px = new List<int>();
+        List<int> py = new List<int>();
 
+        ConsoleColor water = ConsoleColor.Blue;
+        public void boor(bool[,] water)
+        {
+            if (water[posX,posY])
+            {
+                toonwater(true);
             }
         }
         public void toonwater(bool succes)
         {
             if (succes == true)
             {
+               // Console.BackgroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(posX, posY);
                 Console.ForegroundColor = water;
-                Console.Write(waterplas);
+                Console.Write('-');
+                px.Add(posX);
+                py.Add(posY);
             }
             else
             {
 
             }
+        }
+        public void gevondenwater()
+        {
+
+            int[] x = px.OfType<int>().ToArray();
+            int[] y = py.OfType<int>().ToArray();
+            for (int i = 0; i < x.Length; i++)
+            {
+                Console.SetCursorPosition(x[i], y[i]);
+                Console.ForegroundColor = water;
+                Console.Write('-');
+            }
+
+            
         }
 
     }

@@ -68,7 +68,7 @@ namespace MarsRover
              Ymax = y;
         }
 
-        public void Plaats()
+        public bool[,] Plaats()
         {
             for (int i = 1; i < Xmax-1; i++)
             {
@@ -82,6 +82,7 @@ namespace MarsRover
                     else { waterplaatsen[i, j] = false; }
                 }
             }
+            return waterplaatsen;
         }
     }
 }
