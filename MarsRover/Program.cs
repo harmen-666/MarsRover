@@ -8,7 +8,7 @@ namespace MarsRover
 {
     public class Program
     {
- 
+
         public static void Main(string[] args)
         {
 
@@ -51,6 +51,8 @@ namespace MarsRover
                     rover.ToonInSight();
                     mars.toonMars();
                     station.toonBasis();
+                    rover.fuel();
+
                 }
             }
         }
@@ -68,7 +70,7 @@ namespace MarsRover
 
         public InSight()
         {
-             F = new Energie();
+            F = new Energie();
         }
 
         public InSight(char symbool, ConsoleColor kleur)
@@ -90,9 +92,9 @@ namespace MarsRover
         {
             if (F.huidigverbruik() > 0)
             {
-            posY++;
-            F.verbruik(vpv);
-                }
+                posY++;
+                F.verbruik(vpv);
+            }
         }
 
         public void moveLeft()
@@ -108,19 +110,23 @@ namespace MarsRover
         {
             if (F.huidigverbruik() > 0)
             {
-            posX++;
-            F.verbruik(vpv);
-                }
+                posX++;
+                F.verbruik(vpv);
+            }
         }
-
+        //change is goood 
         public void ToonInSight()
         {
-            if (posX >= 0 && posY >= 0) 
+            if (posX >= 0 && posY >= 0)
             {
                 Console.ForegroundColor = kleur;
                 Console.SetCursorPosition(posX, posY);
                 Console.Write(symbool);
             }
+        }
+        public void fuel()
+        {
+            F.huidigefuel();
         }
 
     }
@@ -128,17 +134,24 @@ namespace MarsRover
     class Energie
     {
         private int fuel = 50;
-        public int verbruik(int F) {
+        public int verbruik(int F)
+        {
             fuel = fuel - F;
             return fuel;
         }
-        public int huidigverbruik(int groote)
+        //GNOMED     
+        public int huidigverbruik()
         {
             return fuel;
         }
         public void opladen()
         {
             fuel = 50;
+        }
+        public void huidigefuel()
+        {
+            Console.SetCursorPosition(45, 0); //test
+            Console.Write("Fuel : " + fuel);
         }
     }
 
@@ -169,6 +182,6 @@ namespace MarsRover
             //energie = energie++;
         }
 
-}
+    }
 
 }
