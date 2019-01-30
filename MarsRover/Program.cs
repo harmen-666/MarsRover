@@ -21,10 +21,10 @@ namespace MarsRover
             Basisstation station = new Basisstation(mars.grootteX, mars.grootteY);
             InSight rover = new InSight();
 
-            GenerateWater Water = new GenerateWater();
+            //GenerateWater Water = new GenerateWater();
             Energie energie = new Energie();
-            int[] CoWaX = Water.GenerateX();
-            int[] CoWaY = Water.GenerateY();
+            //int[] CoWaX = Water.GenerateX();
+            //int[] CoWaY = Water.GenerateY();
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
 
             rover.ToonInSight();
