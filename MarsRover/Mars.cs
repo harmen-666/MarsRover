@@ -100,7 +100,6 @@ namespace MarsRover
             int kans;
             bool[,] waterplaatsen;
             Random Generate = new Random();
-            public bool[,] Plaats()
             public GenerateWater(int x, int y)
             {
 
@@ -109,7 +108,7 @@ namespace MarsRover
                 Ymax = y;
             }
 
-            public void Plaats()
+            public bool[,] Plaats()
             {
                 for (int i = 1; i < Xmax - 1; i++)
                 {
@@ -123,6 +122,7 @@ namespace MarsRover
                         else { waterplaatsen[i, j] = false; }
                     }
                 }
+            return waterplaatsen;
             }
             public void WaterZien()
             {
@@ -154,7 +154,6 @@ namespace MarsRover
                     }
                 }
             }
-            return waterplaatsen;
         }
     
 }
