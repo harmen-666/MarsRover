@@ -9,9 +9,17 @@ namespace MarsRover
 {
     class Mars
     {
+        public int grootteX = 40;
+        public int grootteY = 20;
+        bool[,] arrayrotsen = new bool[40,20];
 
-       public int grootteX = 40;
-       public int grootteY = 20;
+        public Mars()
+        {
+            RotsenGenereren();
+            RotsenTonen();
+        }
+
+        
 
 
         //Maakt een omgeving waarin je kan bewegen (in de console)
@@ -48,68 +56,104 @@ namespace MarsRover
                 Console.SetCursorPosition(i, grootteY);
                 Console.Write("═");
             }
+
+
         }
 
-    class GenerateWater
-    {
-        int Xmax;
-        int Ymax;
-        int kans;
-        bool[,] waterplaatsen;
-        Random Generate = new Random();
-
-        public GenerateWater(int x, int y)
+        public void RotsenTonen() // YANNICK: Spawn rotsen op random locatie binnen gebied //This is torture
         {
-
-            waterplaatsen = new bool[x,y];
-             Xmax = x;
-             Ymax = y;
-        }
-
-        public void Plaats()
-        {
-            for (int i = 1; i < Xmax-1; i++)
+            for (int i = 0; i < arrayrotsen.GetLength(0); i++)
             {
-                for (int j = 1; j < Ymax-1; j++)
+                for (int l = 0; l < arrayrotsen.GetLength(1); l++)
                 {
-                    kans = Generate.Next(0, 10);
-                    if(kans == 1)
+                    if (arrayrotsen[i,l] == true)
                     {
-                        waterplaatsen[i, j] = true;
+                        char charrots = '£';
+                        Console.SetCursorPosition(i, l);
+                        Console.WriteLine(charrots);
                     }
-                    else { waterplaatsen[i, j] = false; }
-                }
-            }
-        }
-        public void WaterZien()
-        {
-            for (int i = 1; i < Xmax - 1; i++)
-            {
-                for (int j = 1; j < Ymax - 1; j++)
-                {
-                    if (waterplaatsen[i,j] == true)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.SetCursorPosition(i, j);
-                        Console.Write("%");
-                    }
+                    
 
                 }
             }
         }
-        public void WaterNietZien()
-        {
-            for (int i = 1; i < Xmax - 1; i++)
-            {
-                for (int j = 1; j < Ymax - 1; j++)
-                {
-                    if (waterplaatsen[i, j] == true)
-                    {
-                        Console.Write(" ");
-                    }
 
-                }
+        public void RotsenGenereren()
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                arrayrotsen[random.Next(1, 39),random.Next(1, 19)] = true;
             }
+           
+
         }
     }
+
+        class GenerateWater
+
+        {
+        
+            int Xmax;
+            int Ymax;
+            int kans;
+            bool[,] waterplaatsen;
+            Random Generate = new Random();
+            public GenerateWater(int x, int y)
+            {
+
+                waterplaatsen = new bool[x, y];
+                Xmax = x;
+                Ymax = y;
+            }
+
+            public bool[,] Plaats()
+            {
+                for (int i = 1; i < Xmax - 1; i++)
+                {
+                    for (int j = 1; j < Ymax - 1; j++)
+                    {
+                        kans = Generate.Next(0, 10);
+                        if (kans == 1)
+                        {
+                            waterplaatsen[i, j] = true;
+                        }
+                        else { waterplaatsen[i, j] = false; }
+                    }
+                }
+            return waterplaatsen;
+            }
+            public void WaterZien()
+            {
+                for (int i = 1; i < Xmax - 1; i++)
+                {
+                    for (int j = 1; j < Ymax - 1; j++)
+                    {
+                        if (waterplaatsen[i, j] == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.SetCursorPosition(i, j);
+                            Console.Write("%");
+                        }
+
+                    }
+                }
+            }
+            public void WaterNietZien()
+            {
+                for (int i = 1; i < Xmax - 1; i++)
+                {
+                    for (int j = 1; j < Ymax - 1; j++)
+                    {
+                        if (waterplaatsen[i, j] == true)
+                        {
+                            Console.Write(" ");
+                        }
+
+                    }
+                }
+            }
+        }
+    
 }
