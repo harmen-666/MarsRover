@@ -9,7 +9,7 @@ namespace MarsRover
 {
     class Mars
     {
-      public int grootteX = 40;
+        public int grootteX = 40;
         public int grootteY = 20;
         bool[,] arrayrotsen = new bool[40,20];
 

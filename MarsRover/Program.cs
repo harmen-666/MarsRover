@@ -18,14 +18,21 @@ namespace MarsRover
             //Barier grens = new Barier();
 
             Mars mars = new Mars();
-            Basisstation station = new Basisstation();
+            Basisstation station = new Basisstation(mars.grootteX, mars.grootteY);
             InSight rover = new InSight();
+
+            GenerateWater Water = new GenerateWater();
+            Energie energie = new Energie();
+            int[] CoWaX = Water.GenerateX();
+            int[] CoWaY = Water.GenerateY();
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
+
             rover.ToonInSight();
             mars.toonMars();
 
             //grens.test(rover);
             station.toonBasis();
+            station.Laadstation(rover.posX, rover.posY, energie);
             water.Plaats();
 
 
@@ -215,34 +222,37 @@ namespace MarsRover
 
         }
     }
-
     class Basisstation
     {
+        //Locatie basisstation
+        Random locatie = new Random();
+        int bposX;
+        int bposY;
+
+        public Basisstation (int grootteX, int grootteY)
+	    {
+            bposX = locatie.Next(1,grootteX);
+            bposY = locatie.Next(1,grootteY);
+	    }
+
         char symbool = '▀';
-        ConsoleColor basis = ConsoleColor.Green;
-        int posX = 5;
-        int posY = 3;
+        ConsoleColor station = ConsoleColor.Green;
 
         public void toonBasis()
         {
-            Console.SetCursorPosition(posX, posY);
+            Console.SetCursorPosition(bposX, bposY);
             Console.Write(symbool);
         }
 
 
-        private void Laadstation()
+        public void Laadstation(int posX, int posY, Energie en)
         {
-            if (posX == 50 && posY == 30)
+            if (bposX == posX && bposY == posY)
             {
-                Opladen();
+                en.opladen();
             }
         }
-
-        private void Opladen()
-        {
-            //energie = energie++;
-        }
-
+        //Wachtende op joris
 }
 
 }
