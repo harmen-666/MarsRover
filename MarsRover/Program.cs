@@ -11,7 +11,6 @@ namespace MarsRover
  
         public static void Main(string[] args)
         {
-
             Console.BackgroundColor = ConsoleColor.DarkRed; // mars :-)
             Console.Clear();
             Console.CursorVisible = false; // cursor weg
@@ -62,7 +61,12 @@ namespace MarsRover
                     Console.Clear();
                     rover.ToonInSight();
                     mars.toonMars();
+
+                    mars.RotsenTonen();
+
+
                     station.toonBasis();
+
                 }
             }
         }
@@ -151,10 +155,10 @@ namespace MarsRover
         ConsoleColor water = ConsoleColor.Blue;
         public void boor()
         {
-            for (int i =0; i < .length; i++)
-            {
+            //for (int i =0; i < .length; i++)
+            //{
 
-            }
+            //}
         }
         public void toonwater(bool succes)
         {
@@ -179,7 +183,7 @@ namespace MarsRover
             fuel = fuel - F;
             return fuel;
         }
-        public int huidigverbruik(int groote)
+        public int huidigverbruik()
         {
             return fuel;
         }
