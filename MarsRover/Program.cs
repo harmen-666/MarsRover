@@ -15,6 +15,7 @@ namespace MarsRover
             Console.BackgroundColor = ConsoleColor.DarkRed; // mars :-)
             Console.Clear();
             Console.CursorVisible = false; // cursor weg
+            //Barier grens = new Barier();
 
             Mars mars = new Mars();
             Basisstation station = new Basisstation();
@@ -22,8 +23,11 @@ namespace MarsRover
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
             rover.ToonInSight();
             mars.toonMars();
+
+            //grens.test(rover);
             station.toonBasis();
             water.Plaats();
+
 
             while (true)
             {
@@ -70,8 +74,9 @@ namespace MarsRover
         //hey kids
         char symbool = '#';
         ConsoleColor kleur = ConsoleColor.Yellow;
-        int posX = 1;
-        int posY = 1;
+
+        public int posX = 1;
+        public int posY = 1;
         Energie F;
         //verbreuk per verplaatsing
         public int vpv = 1;
@@ -89,7 +94,8 @@ namespace MarsRover
 
         public void moveUp()
         {
-            if (posY > 0 && F.huidigverbruik() > 0)
+
+            if (posY > 1 && F.huidigverbruik() > 0)
             {
                 posY--;
                 F.verbruik(vpv);
@@ -98,29 +104,34 @@ namespace MarsRover
 
         public void moveDown()
         {
-            if (F.huidigverbruik() > 0)
+  
+            if (posY < 19 && F.huidigverbruik() > 0)
             {
-            posY++;
-            F.verbruik(vpv);
-                }
+              posY++;
+              F.verbruik(vpv);
+            }
         }
 
         public void moveLeft()
         {
-            if (posX > 0 && F.huidigverbruik() > 0)
+
+            if (posX > 1 && F.huidigverbruik() > 0)
             {
                 posX--;
                 F.verbruik(vpv);
             }
+       
+     
         }
 
         public void moveRight()
         {
-            if (F.huidigverbruik() > 0)
+
+            if (posX < 39 && F.huidigverbruik() > 0)
             {
-            posX++;
-            F.verbruik(vpv);
-                }
+              posX++;
+              F.verbruik(vpv);
+            }
         }
         
 
@@ -175,6 +186,7 @@ namespace MarsRover
         public void opladen()
         {
             fuel = 50;
+
         }
     }
 
@@ -208,3 +220,5 @@ namespace MarsRover
 }
 
 }
+
+

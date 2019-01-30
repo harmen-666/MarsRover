@@ -9,9 +9,9 @@ namespace MarsRover
 {
     class Mars
     {
+
        public int grootteX = 40;
        public int grootteY = 20;
-
 
 
         //Maakt een omgeving waarin je kan bewegen (in de console)
@@ -50,8 +50,6 @@ namespace MarsRover
             }
         }
 
-
-        }
     class GenerateWater
     {
         int Xmax;
@@ -115,4 +113,3 @@ namespace MarsRover
         }
     }
 }
-// AND YOUVE BEEN GNOMED
