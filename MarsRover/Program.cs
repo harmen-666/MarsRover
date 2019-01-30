@@ -11,7 +11,6 @@ namespace MarsRover
  
         public static void Main(string[] args)
         {
-
             Console.BackgroundColor = ConsoleColor.DarkRed; // mars :-)
             Console.Clear();
             Console.CursorVisible = false; // cursor weg
@@ -62,7 +61,12 @@ namespace MarsRover
                     Console.Clear();
                     rover.ToonInSight();
                     mars.toonMars();
+
+                    mars.RotsenTonen();
+
+
                     station.toonBasis();
+
                 }
             }
         }
