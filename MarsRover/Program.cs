@@ -20,12 +20,13 @@ namespace MarsRover
             Basisstation station = new Basisstation(mars.grootteX, mars.grootteY);
             InSight rover = new InSight();
             GenerateWater Water = new GenerateWater();
+            Energie energie = new Energie();
             int[] CoWaX = Water.GenerateX();
             int[] CoWaY = Water.GenerateY();
             rover.ToonInSight();
             mars.toonMars();
             station.toonBasis();
-            station.Laadstation(rover.posX, rover.posY);
+            station.Laadstation(rover.posX, rover.posY, energie);
 
             while (true)
             {
@@ -166,28 +167,28 @@ namespace MarsRover
 
         public Basisstation (int grootteX, int grootteY)
 	    {
-            posX = locatie.Next(1,grootteX);
-            posY = locatie.Next(1,grootteY);
+            bposX = locatie.Next(1,grootteX);
+            bposY = locatie.Next(1,grootteY);
 	    }
 
         char symbool = '▀';
-        ConsoleColor basis = ConsoleColor.Green;
+        ConsoleColor station = ConsoleColor.Green;
 
         public void toonBasis()
         {
-            Console.SetCursorPosition(posX, posY);
+            Console.SetCursorPosition(bposX, bposY);
             Console.Write(symbool);
         }
 
 
-        public void Laadstation(int posX, int posY)
+        public void Laadstation(int posX, int posY, Energie en)
         {
             if (bposX == posX && bposY == posY)
             {
-                Opladen();
+                en.opladen();
             }
         }
-
+        //Wachtende op joris
 }
 
 }
