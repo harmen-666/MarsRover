@@ -33,7 +33,7 @@ namespace MarsRover
             //grens.test(rover);
             station.toonBasis();
             station.Laadstation(rover.posX, rover.posY, energie);
-            water.Plaats();
+            water.watergen();
 
 
             while (true)
@@ -59,9 +59,6 @@ namespace MarsRover
                         case ConsoleKey.T:
                             water.WaterZien();
                             break;
-                        case ConsoleKey.Y:
-                            water.WaterNietZien();
-                            break;
                         case ConsoleKey.Enter:
                             rover.boor(water.Plaats());
                             break;
@@ -73,6 +70,7 @@ namespace MarsRover
                     station.toonBasis();
                     rover.fuel();
                     rover.gevondenwater();
+                    water.WaterZienMap();
 
 
                 }
