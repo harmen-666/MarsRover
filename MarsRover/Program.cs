@@ -254,6 +254,7 @@ namespace MarsRover
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
         }
 
 
