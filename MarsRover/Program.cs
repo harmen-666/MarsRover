@@ -59,9 +59,6 @@ namespace MarsRover
                         case ConsoleKey.T:
                             water.WaterZien();
                             break;
-                        case ConsoleKey.Y:
-                            water.WaterNietZien();
-                            break;
                         case ConsoleKey.Enter:
                             rover.boor(water.Plaats());
                             break;
@@ -72,6 +69,7 @@ namespace MarsRover
                     mars.RotsenTonen();
                     station.toonBasis();
                     rover.gevondenwater();
+                    water.WaterZienMap();
 
 
 

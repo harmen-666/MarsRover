@@ -98,6 +98,7 @@ namespace MarsRover
             int Xmax;
             int Ymax;
             int kans;
+            bool tonen = false;
             bool[,] waterplaatsen;
             Random Generate = new Random();
             public GenerateWater(int x, int y)
@@ -124,7 +125,19 @@ namespace MarsRover
                 }
             return waterplaatsen;
             }
+
             public void WaterZien()
+            {
+            if (tonen == true)
+            {
+                tonen = false;
+            }
+            else { tonen = true;}
+            }
+
+            public void WaterZienMap()
+            {
+            if (tonen == true)
             {
                 for (int i = 1; i < Xmax - 1; i++)
                 {
@@ -132,15 +145,13 @@ namespace MarsRover
                     {
                         if (waterplaatsen[i, j] == true)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.SetCursorPosition(i, j);
-                            Console.Write("%");
+                            Console.Write('*');
                         }
 
                     }
                 }
             }
-            public void WaterNietZien()
+            else
             {
                 for (int i = 1; i < Xmax - 1; i++)
                 {
@@ -154,6 +165,8 @@ namespace MarsRover
                     }
                 }
             }
+
+        }
         }
     
 }
