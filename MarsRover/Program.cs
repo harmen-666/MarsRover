@@ -274,7 +274,6 @@ namespace MarsRover
     }
 
         //Wachtende op joris
-}
 
 
 }
