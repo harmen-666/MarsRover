@@ -223,7 +223,7 @@ namespace MarsRover
         }
         public void opladen()
         {
-            fuel = 50;
+            fuel = 60;
 
         }
         public void huidigefuel()
