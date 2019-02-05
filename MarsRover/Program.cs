@@ -24,10 +24,10 @@ namespace MarsRover
             //GenerateWater Water = new GenerateWater();
             Energie energie = new Energie();
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
-
+            
             rover.ToonInSight();
             mars.toonMars();
-
+            rover.fuel();
             //grens.test(rover);
             station.toonBasis();
             station.Laadstation(rover.posX, rover.posY, energie);
@@ -210,7 +210,7 @@ namespace MarsRover
 
     class Energie
     {
-        private int fuel = 50;
+        private int fuel = 80;
         public int verbruik(int F)
         {
             fuel = fuel - F;
@@ -223,7 +223,8 @@ namespace MarsRover
         }
         public void opladen()
         {
-            fuel = 60;
+
+            fuel = 80;
 
         }
         public void huidigefuel()
@@ -262,7 +263,7 @@ namespace MarsRover
             }
         }
     }
- }
+
 }
 
 
