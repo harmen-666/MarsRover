@@ -252,7 +252,6 @@ namespace MarsRover
         {
             Console.SetCursorPosition(bposX, bposY);
             Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(" ");
             Console.BackgroundColor = ConsoleColor.DarkRed;
         }
