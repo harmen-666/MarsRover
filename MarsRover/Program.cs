@@ -245,8 +245,7 @@ namespace MarsRover
             bposY = locatie.Next(1,grootteY);
 	    }
 
-        char symbool = '▀';
-        ConsoleColor station = ConsoleColor.Green;
+
 
         public void toonBasis()
         {
