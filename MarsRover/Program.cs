@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -23,8 +23,6 @@ namespace MarsRover
 
             //GenerateWater Water = new GenerateWater();
             Energie energie = new Energie();
-            //int[] CoWaX = Water.GenerateX();
-            //int[] CoWaY = Water.GenerateY();
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
 
             rover.ToonInSight();
@@ -71,7 +69,7 @@ namespace MarsRover
                     rover.fuel();
                     rover.gevondenwater();
                     water.WaterZienMap();
-
+                    station.Laadstation(rover.posX, rover.posY, energie);
 
                 }
             }
@@ -253,7 +251,9 @@ namespace MarsRover
         public void toonBasis()
         {
             Console.SetCursorPosition(bposX, bposY);
-            Console.Write(symbool);
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" ");
         }
 
 
@@ -264,16 +264,6 @@ namespace MarsRover
                 en.opladen();
             }
         }
-
-
-        private void Opladen()
-        {
-            //energie = energie++;
-        }
-
-    }
-
-        //Wachtende op joris
 }
 
 
