@@ -239,13 +239,11 @@ namespace MarsRover
         int bposX;
         int bposY;
 
-        public Basisstation (int grootteX, int grootteY)
-	    {
-            bposX = locatie.Next(1,grootteX);
-            bposY = locatie.Next(1,grootteY);
-	    }
-
-
+        public Basisstation(int grootteX, int grootteY)
+        {
+            bposX = locatie.Next(1, grootteX);
+            bposY = locatie.Next(1, grootteY);
+        }
 
         public void toonBasis()
         {
