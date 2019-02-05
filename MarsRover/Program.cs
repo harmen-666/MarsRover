@@ -264,9 +264,8 @@ namespace MarsRover
                 en.opladen();
             }
         }
-}
-
-
+    }
+ }
 }
 
 
