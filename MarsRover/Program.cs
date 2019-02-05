@@ -223,6 +223,7 @@ namespace MarsRover
         }
         public void opladen()
         {
+
             fuel = 80;
 
         }
@@ -239,21 +240,18 @@ namespace MarsRover
         int bposX;
         int bposY;
 
-        public Basisstation (int grootteX, int grootteY)
-	    {
-            bposX = locatie.Next(1,grootteX);
-            bposY = locatie.Next(1,grootteY);
-	    }
-
-        char symbool = '▀';
-        ConsoleColor station = ConsoleColor.Green;
+        public Basisstation(int grootteX, int grootteY)
+        {
+            bposX = locatie.Next(1, grootteX);
+            bposY = locatie.Next(1, grootteY);
+        }
 
         public void toonBasis()
         {
             Console.SetCursorPosition(bposX, bposY);
             Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
         }
 
 
