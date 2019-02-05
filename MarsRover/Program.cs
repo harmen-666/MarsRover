@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace MarsRover
 {
     public class Program
     {
- 
+
         public static void Main(string[] args)
         {
             Console.BackgroundColor = ConsoleColor.DarkRed; // mars :-)
@@ -17,15 +18,20 @@ namespace MarsRover
             //Barier grens = new Barier();
 
             Mars mars = new Mars();
-            Basisstation station = new Basisstation();
+            Basisstation station = new Basisstation(mars.grootteX, mars.grootteY);
             InSight rover = new InSight();
+
+            //GenerateWater Water = new GenerateWater();
+            Energie energie = new Energie();
             GenerateWater water = new GenerateWater(mars.grootteX, mars.grootteY);
+            
             rover.ToonInSight();
             mars.toonMars();
-
+            rover.fuel();
             //grens.test(rover);
             station.toonBasis();
-            water.Plaats();
+            station.Laadstation(rover.posX, rover.posY, energie);
+            water.watergen();
 
 
             while (true)
@@ -51,21 +57,19 @@ namespace MarsRover
                         case ConsoleKey.T:
                             water.WaterZien();
                             break;
-                        case ConsoleKey.Y:
-                            water.WaterNietZien();
-                            break;
                         case ConsoleKey.Enter:
-                            rover.boor();
+                            rover.boor(water.Plaats());
                             break;
                     }
                     Console.Clear();
                     rover.ToonInSight();
                     mars.toonMars();
-
                     mars.RotsenTonen();
-
-
                     station.toonBasis();
+                    rover.fuel();
+                    rover.gevondenwater();
+                    water.WaterZienMap();
+                    station.Laadstation(rover.posX, rover.posY, energie);
 
                 }
             }
@@ -87,7 +91,7 @@ namespace MarsRover
 
         public InSight()
         {
-             F = new Energie();
+            F = new Energie();
         }
 
         public InSight(char symbool, ConsoleColor kleur)
@@ -111,8 +115,9 @@ namespace MarsRover
   
             if (posY < 19 && F.huidigverbruik() > 0)
             {
-              posY++;
-              F.verbruik(vpv);
+                posY++;
+                F.verbruik(vpv);
+
             }
         }
 
@@ -133,95 +138,131 @@ namespace MarsRover
 
             if (posX < 39 && F.huidigverbruik() > 0)
             {
-              posX++;
-              F.verbruik(vpv);
+
+                posX++;
+                F.verbruik(vpv);
             }
         }
-        
 
         public void ToonInSight()
         {
-            if (posX >= 0 && posY >= 0) 
+            if (posX >= 0 && posY >= 0)
             {
                 Console.ForegroundColor = kleur;
                 Console.SetCursorPosition(posX, posY);
                 Console.Write(symbool);
             }
         }
+
+        public void fuel()
+        {
+            F.huidigefuel();
+}
+
         //boren
         bool succes = false;
-        char waterplas = '〰';
-        
-        ConsoleColor water = ConsoleColor.Blue;
-        public void boor()
-        {
-            //for (int i =0; i < .length; i++)
-            //{
+      //  char waterplas = '〰';
+        List<int> px = new List<int>();
+        List<int> py = new List<int>();
 
-            //}
+        ConsoleColor water = ConsoleColor.Blue;
+        public void boor(bool[,] water)
+        {
+
+            if (water[posX,posY])
+            {
+                toonwater(true);
+            }
+
         }
         public void toonwater(bool succes)
         {
             if (succes == true)
             {
+               // Console.BackgroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(posX, posY);
                 Console.ForegroundColor = water;
-                Console.Write(waterplas);
+                Console.Write('-');
+                px.Add(posX);
+                py.Add(posY);
             }
             else
             {
 
             }
         }
+        public void gevondenwater()
+        {
+
+            int[] x = px.OfType<int>().ToArray();
+            int[] y = py.OfType<int>().ToArray();
+            for (int i = 0; i < x.Length; i++)
+            {
+                Console.SetCursorPosition(x[i], y[i]);
+                Console.ForegroundColor = water;
+                Console.Write('-');
+            }
+
+            
+        }
 
     }
 
     class Energie
     {
-        private int fuel = 50;
-        public int verbruik(int F) {
+        private int fuel = 80;
+        public int verbruik(int F)
+        {
             fuel = fuel - F;
             return fuel;
         }
+
         public int huidigverbruik()
         {
             return fuel;
         }
         public void opladen()
         {
-            fuel = 50;
+
+            fuel = 80;
 
         }
+        public void huidigefuel()
+        {
+            Console.SetCursorPosition(45, 0); //test
+            Console.Write("Fuel : " + fuel);
+        }
     }
-
     class Basisstation
     {
-        char symbool = '▀';
-        ConsoleColor basis = ConsoleColor.Green;
-        int posX = 5;
-        int posY = 3;
+        //Locatie basisstation
+        Random locatie = new Random();
+        int bposX;
+        int bposY;
+
+        public Basisstation(int grootteX, int grootteY)
+        {
+            bposX = locatie.Next(1, grootteX);
+            bposY = locatie.Next(1, grootteY);
+        }
 
         public void toonBasis()
         {
-            Console.SetCursorPosition(posX, posY);
-            Console.Write(symbool);
+            Console.SetCursorPosition(bposX, bposY);
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
         }
 
 
-        private void Laadstation()
+        public void Laadstation(int posX, int posY, Energie en)
         {
-            if (posX == 50 && posY == 30)
+            if (bposX == posX && bposY == posY)
             {
-                Opladen();
+                en.opladen();
             }
         }
-
-        private void Opladen()
-        {
-            //energie = energie++;
-        }
-
-}
+    }
 
 }
 

@@ -9,7 +9,7 @@ namespace MarsRover
 {
     class Mars
     {
-      public int grootteX = 40;
+        public int grootteX = 40;
         public int grootteY = 20;
         bool[,] arrayrotsen = new bool[40,20];
 
@@ -92,13 +92,15 @@ namespace MarsRover
     }
 
         class GenerateWater
+
         {
+        
             int Xmax;
             int Ymax;
             int kans;
+            bool tonen = false;
             bool[,] waterplaatsen;
             Random Generate = new Random();
-
             public GenerateWater(int x, int y)
             {
 
@@ -106,39 +108,38 @@ namespace MarsRover
                 Xmax = x;
                 Ymax = y;
             }
-
-            public void Plaats()
+        public void watergen()
+        {
+            for (int i = 1; i < Xmax - 1; i++)
             {
-                for (int i = 1; i < Xmax - 1; i++)
+                for (int j = 1; j < Ymax - 1; j++)
                 {
-                    for (int j = 1; j < Ymax - 1; j++)
+                    kans = Generate.Next(0, 10);
+                    if (kans == 1)
                     {
-                        kans = Generate.Next(0, 10);
-                        if (kans == 1)
-                        {
-                            waterplaatsen[i, j] = true;
-                        }
-                        else { waterplaatsen[i, j] = false; }
+                        waterplaatsen[i, j] = true;
                     }
+                    else { waterplaatsen[i, j] = false; }
                 }
             }
+        }
+        public bool[,] Plaats()
+            {
+            return waterplaatsen;
+            }
+
             public void WaterZien()
             {
-                for (int i = 1; i < Xmax - 1; i++)
-                {
-                    for (int j = 1; j < Ymax - 1; j++)
-                    {
-                        if (waterplaatsen[i, j] == true)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.SetCursorPosition(i, j);
-                            Console.Write("%");
-                        }
-
-                    }
-                }
+            if (tonen == true)
+            {
+                tonen = false;
             }
-            public void WaterNietZien()
+            else { tonen = true;}
+            }
+
+            public void WaterZienMap()
+            {
+            if (tonen == true)
             {
                 for (int i = 1; i < Xmax - 1; i++)
                 {
@@ -146,12 +147,17 @@ namespace MarsRover
                     {
                         if (waterplaatsen[i, j] == true)
                         {
-                            Console.Write(" ");
+                            Console.Write('*');
                         }
 
                     }
                 }
             }
+            else
+            {
+            }
+
+        }
         }
     
 }
